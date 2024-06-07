@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Events in Salt Lake City</h1>
+  {{#if events.length}}
+    <ul class="event-list">
+      {{#each events}}
+        <li class="event-item">
+          <h2>{{this.name}}</h2>
+          <p>Date: {{format_date this.startDate}}</p>
+          <p>Time: {{format_time this.startTime}}</p>
+          <p>Venue: {{this.venue}}</p>
+          <a href="{{this.url}}" target="_blank">View Details</a>
+          <button class="save-event" data-id="{{this.id}}">Save Event</button>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>No events found.</p>
+  {{/if}}
+</div>

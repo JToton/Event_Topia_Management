@@ -1,0 +1,60 @@
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Planner</title>
+    <link rel="stylesheet" type="text/css" href="/css/jass.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <h1>Eventopia</h1>
+      <div class="nav-buttons">
+        <input type="text" id="city-search" placeholder="search a city" />
+        <a href="/">Salt Lake City Events</a>
+        <a href="/saved-events">Saved Events</a>
+        {{#if loggedIn}}
+          <button id="logout" class="logout-btn">Logout</button>
+        {{else}}
+          <a href="/login">Login</a>
+        {{/if}}
+      </div>
+    </nav>
+
+    <header>
+      <img src="/images/Banner2.png" alt="concert image" />
+    </header>
+    <main>
+      <div class="genre">
+        <button id="Music" class="btn-no-style genre-btn">Music</button>
+        <button id="Nightlife" class="btn-no-style genre-btn">Nightlife</button>
+        <button id="Performing" class="btn-no-style genre-btn">Performing /
+          Visual Arts</button>
+        <button id="Holidays" class="btn-no-style genre-btn">Holidays</button>
+        <button id="Dating" class="btn-no-style genre-btn">Dating</button>
+        <button id="Hobbies" class="btn-no-style genre-btn">Hobbies</button>
+        <button id="Business" class="btn-no-style genre-btn">Business</button>
+        <button id="Food" class="btn-no-style genre-btn">Food and Drink</button>
+      </div>
+      <div class="container">
+        {{{body}}}
+      </div>
+    </main>
+    {{#if loggedIn}}
+      <script src="/js/logout.js"></script>
+    {{/if}}
+    <footer>
+      <p>&copy; 2024 Eventopia. All rights reserved.</p>
+      <div>
+        <a href="https://github.com/creator1">Creator 1</a>
+        <a href="https://github.com/creator2">Creator 2</a>
+        <a href="https://github.com/creator3">Creator 3</a>
+        <a href="https://github.com/creator4">Creator 4</a>
+      </div>
+    </footer>
+
+  </body>
+  <script src="/js/saveEvent.js"></script>
+</html>
