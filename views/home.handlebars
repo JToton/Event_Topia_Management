@@ -10,6 +10,7 @@
       {{#each events}}
         <div class="event-card">
           <h2>{{this.name}}</h2>
+          <img src="{{this.imageUrl}}" alt="{{this.name}} image" style="width: 100%; height: auto;">
           <p>Date: {{format_date this.startDate}}</p>
           <p>Time: {{format_time this.startTime}}</p>
           <p>Venue: {{this.venue}}</p>

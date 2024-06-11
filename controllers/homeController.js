@@ -23,14 +23,23 @@ router.get("/", async (req, res) => {
       }
     );
 
-    const events = response.data._embedded.events.map((event) => ({
-      id: event.id,
-      name: event.name,
-      url: event.url,
-      startDate: event.dates.start.localDate,
-      startTime: event.dates.start.localTime,
-      venue: event._embedded.venues[0].name,
-    }));
+    const events = response.data._embedded.events.map((event) => {
+      // Extract the first available image URL or use a placeholder
+      const imageUrl =
+        event.images && event.images.length > 0
+          ? event.images[0].url
+          : "placeholder-image-url";
+
+      return {
+        id: event.id,
+        name: event.name,
+        url: event.url,
+        startDate: event.dates.start.localDate,
+        startTime: event.dates.start.localTime,
+        venue: event._embedded.venues[0].name,
+        imageUrl, // Add the image URL to the event object
+      };
+    });
 
     res.render("home", {
       events,
