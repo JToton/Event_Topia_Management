@@ -6,6 +6,8 @@ const { SavedEvent } = require("../models");
 
 // GET all events in Salt Lake City from Ticketmaster Discovery API
 router.get("/", async (req, res) => {
+  //! added for debugging
+  console.log("Home route handler triggered");
   try {
     const response = await axios.get(
       "https://app.ticketmaster.com/discovery/v2/events.json",
