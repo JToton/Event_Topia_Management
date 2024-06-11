@@ -8,8 +8,13 @@
   {{#each savedEvents}}
     <div class="event-card">
       <h2>{{event_name}}</h2>
-      <p>Date: {{event_date}}</p>
-      <button class="remove-event" data-event-id="{{event_id}}">Remove</button>
+      <p>Date: {{format_date event_date}}</p>
+      <button
+        class="remove-event"
+        data-event-id="{{event_id}}"
+        data-event-name="{{event_name}}"
+        data-event-date="{{event_date}}"
+      >Remove</button>
     </div>
   {{/each}}
 </div>

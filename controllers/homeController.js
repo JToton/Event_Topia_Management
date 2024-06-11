@@ -41,8 +41,18 @@ router.get("/", async (req, res) => {
       };
     });
 
+    let savedEvents = [];
+
+    if (req.session.userId) {
+      // Fetch the user's saved events only if userId exists in the session
+      savedEvents = await SavedEvent.findAll({
+        where: { user_id: req.session.userId },
+      });
+    }
+
     res.render("home", {
       events,
+      savedEvents,
       loggedIn: req.session.logged_in,
     });
   } catch (err) {
@@ -66,8 +76,8 @@ router.post("/save-event", authMiddleware, async (req, res) => {
     console.log("User ID:", userId);
 
     // Check if the event is already saved by the user
-    const existingEvent = await Event.findOne({
-      where: { id: eventId, userId: userId },
+    const existingEvent = await SavedEvent.findOne({
+      where: { event_id: eventId, user_id: userId },
     });
 
     if (existingEvent) {
@@ -75,14 +85,11 @@ router.post("/save-event", authMiddleware, async (req, res) => {
     }
 
     // Save the event with the associated user ID and all required fields
-    await Event.create({
-      id: eventId,
-      name: eventName,
-      startDate: eventStartDate,
-      startTime: eventStartTime,
-      url: eventUrl,
-      venue: eventVenue,
-      userId: userId,
+    await SavedEvent.create({
+      user_id: userId,
+      event_id: eventId,
+      event_name: eventName,
+      event_date: eventStartDate,
     });
 
     res.status(200).json({ message: "Event saved successfully" });

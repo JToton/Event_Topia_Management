@@ -25,8 +25,12 @@ router.post("/login", async (req, res) => {
         .render("login", { error: "Invalid email or password" });
     }
 
-    req.session.user_id = user.id;
     req.session.logged_in = true;
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+    };
+    req.session.userId = user.id; // Set the userId in the session
 
     res.redirect("/");
   } catch (err) {
@@ -50,8 +54,12 @@ router.post("/signup", async (req, res) => {
       password: hashedPassword,
     });
 
-    req.session.user_id = newUser.id;
     req.session.logged_in = true;
+    req.session.user = {
+      id: newUser.id,
+      username: newUser.username,
+    };
+    req.session.userId = newUser.id; // Set the userId in the session
 
     res.redirect("/");
   } catch (err) {

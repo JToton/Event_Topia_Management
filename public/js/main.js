@@ -31,6 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const eventName = event.target.dataset.eventName;
       const eventDate = event.target.dataset.eventDate;
 
+      // !Debugging log
+      console.log("Event ID:", eventId);
+      console.log("Event Name:", eventName);
+      console.log("Event Date:", eventDate);
+
+      if (!eventId || !eventName || !eventDate) {
+        // !Debugging log
+        console.error("Missing event data");
+        return;
+      }
+
       try {
         const response = await fetch("/save-event", {
           method: "POST",

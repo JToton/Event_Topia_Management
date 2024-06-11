@@ -16,10 +16,17 @@
           <p>Venue: {{this.venue}}</p>
           <a href="{{this.url}}" target="_blank">View Details</a>
           {{#if ../loggedIn}}
-            <button class="save-event" data-id="{{this.id}}">Save Event</button>
-          {{else}}
-            <a href="/login">Log in to save events</a>
-          {{/if}}
+  <button
+    class="save-event"
+    data-event-id="{{this.id}}"
+    data-event-name="{{this.name}}"
+    data-event-date="{{this.startDate}}"
+  >
+    Save Event
+  </button>
+{{else}}
+  <a href="/login">Log in to save events</a>
+{{/if}}
         </div>
       {{/each}}
     </div>

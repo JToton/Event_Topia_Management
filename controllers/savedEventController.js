@@ -3,7 +3,7 @@ const authMiddleware = require("../utils/authMiddleware");
 const { SavedEvent } = require("../models");
 
 router.get("/", authMiddleware, async (req, res) => {
-  //! added for debugging
+  // !Debugging log
   console.log("Saved Events route handler triggered");
   try {
     const savedEvents = await SavedEvent.findAll({
@@ -23,6 +23,9 @@ router.get("/", authMiddleware, async (req, res) => {
 router.post("/remove-event", authMiddleware, async (req, res) => {
   try {
     const { eventId } = req.body;
+
+    // !Debugging log
+    console.log("Removing event with ID:", eventId);
 
     await SavedEvent.destroy({
       where: {
