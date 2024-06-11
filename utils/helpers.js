@@ -1,7 +1,10 @@
+// *Helper functions to format date and time.
+
 module.exports = {
   format_time: (time) => {
     if (!time) {
-      return "No Time Available"; // Return an empty string if time is undefined
+      // *Return an empty string if time is undefined.
+      return "No Time Available";
     }
     const [hours, minutes] = time.split(":");
     let hours12 = hours % 12 || 12;
