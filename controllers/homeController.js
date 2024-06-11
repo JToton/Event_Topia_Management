@@ -66,13 +66,15 @@ router.post("/save-event", authMiddleware, async (req, res) => {
     const {
       eventId,
       eventName,
-      eventStartDate,
+      eventDate,
       eventStartTime,
       eventUrl,
       eventVenue,
     } = req.body;
     const userId = req.session.userId;
 
+    // !Debugger Code
+    console.log("Request Body:", req.body); // Add this line to check the request body
     console.log("User ID:", userId);
 
     // Check if the event is already saved by the user
@@ -89,7 +91,7 @@ router.post("/save-event", authMiddleware, async (req, res) => {
       user_id: userId,
       event_id: eventId,
       event_name: eventName,
-      event_date: eventStartDate,
+      event_date: eventDate,
     });
 
     res.status(200).json({ message: "Event saved successfully" });

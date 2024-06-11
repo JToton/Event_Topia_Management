@@ -7,7 +7,7 @@ router.get("/", authMiddleware, async (req, res) => {
   console.log("Saved Events route handler triggered");
   try {
     const savedEvents = await SavedEvent.findAll({
-      where: { user_id: req.session.user_id },
+      where: { user_id: req.session.userId },
     });
 
     res.render("savedEvents", { savedEvents, loggedIn: req.session.logged_in });
@@ -29,7 +29,7 @@ router.post("/remove-event", authMiddleware, async (req, res) => {
 
     await SavedEvent.destroy({
       where: {
-        user_id: req.session.user_id,
+        user_id: req.session.userId,
         event_id: eventId,
       },
     });
