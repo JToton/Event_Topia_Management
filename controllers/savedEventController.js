@@ -10,7 +10,18 @@ router.get("/", authMiddleware, async (req, res) => {
     // *Fetch all saved events for the current user from the database.
     const savedEvents = await SavedEvent.findAll({
       where: { user_id: req.session.userId },
+      attributes: [
+        "event_id",
+        "event_name",
+        "event_date",
+        "event_time",
+        "event_venue",
+        "event_url",
+        "event_image_url",
+      ],
     });
+    // ! Debugging log.
+    console.log("Saved Events:", savedEvents);
 
     // *Render the savedEvents page with the fetched events and login status.
     res.render("savedEvents", { savedEvents, loggedIn: req.session.logged_in });

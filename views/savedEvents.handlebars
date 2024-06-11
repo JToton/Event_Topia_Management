@@ -1,20 +1,46 @@
-<h1>Saved Events</h1>
+<div class="container">
+  <h1>Saved Events</h1>
 
-{{#if error}}
-  <p>{{error}}</p>
-{{/if}}
+  {{#if error}}
+    <p>{{error}}</p>
+  {{/if}}
 
-<div class="event-list">
-  {{#each savedEvents}}
-    <div class="event-card">
-      <h2>{{event_name}}</h2>
-      <p>Date: {{format_date event_date}}</p>
-      <button
-        class="remove-event"
-        data-event-id="{{event_id}}"
-        data-event-name="{{event_name}}"
-        data-event-date="{{event_date}}"
-      >Remove</button>
+  {{#if savedEvents.length}}
+    <div class="event-list">
+      {{#each savedEvents}}
+        <div class="event-card">
+          <h2>{{this.dataValues.event_name}}</h2>
+          {{#if this.dataValues.event_image_url}}
+            <img
+              src="{{this.dataValues.event_image_url}}"
+              alt="{{this.dataValues.event_name}} image"
+              style="width: 100%; height: auto;"
+            />
+          {{else}}
+            <p>No image available</p>
+          {{/if}}
+          <p>Date: {{format_date this.dataValues.event_date}}</p>
+          {{#if this.dataValues.event_time}}
+            <p>Time: {{format_time this.dataValues.event_time}}</p>
+          {{else}}
+            <p>Time: N/A</p>
+          {{/if}}
+          {{#if this.dataValues.event_venue}}
+            <p>Venue: {{this.dataValues.event_venue}}</p>
+          {{else}}
+            <p>Venue: N/A</p>
+          {{/if}}
+          <a href="{{this.dataValues.event_url}}" target="_blank">View Details</a>
+          <button
+            class="remove-event"
+            data-event-id="{{this.dataValues.event_id}}"
+            data-event-name="{{this.dataValues.event_name}}"
+            data-event-date="{{this.dataValues.event_date}}"
+          >Remove</button>
+        </div>
+      {{/each}}
     </div>
-  {{/each}}
+  {{else}}
+    <p>No saved events found.</p>
+  {{/if}}
 </div>

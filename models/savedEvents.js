@@ -30,6 +30,22 @@ SavedEvent.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    event_time: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    event_venue: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    event_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    event_image_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     sequelize,
