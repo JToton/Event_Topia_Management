@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
       "https://app.ticketmaster.com/discovery/v2/events.json",
       {
         params: {
-          apikey: "AVDgVcvKelwg39PSEXIBgvRlF45Qv88g",
+          apikey: process.env.TICKETMASTER_API_KEY,
           city: "Salt Lake City",
           stateCode: "UT",
           radius: "20",
@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
 
     res.render("home", {
       events,
-      loggedIn: req.session.loggedIn,
+      loggedIn: req.session.logged_in,
     });
   } catch (err) {
     console.log(err);
@@ -90,7 +90,7 @@ router.get("/event/:id", authMiddleware, async (req, res) => {
       `https://app.ticketmaster.com/discovery/v2/events/${req.params.id}.json`,
       {
         params: {
-          apikey: "AVDgVcvKelwg39PSEXIBgvRlF45Qv88g",
+          apikey: process.env.TICKETMASTER_API_KEY,
         },
       }
     );
@@ -105,7 +105,7 @@ router.get("/event/:id", authMiddleware, async (req, res) => {
       venue: response.data._embedded.venues[0].name,
     };
 
-    res.render("event", { event, loggedIn: req.session.loggedIn });
+    res.render("event", { event, loggedIn: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -118,7 +118,7 @@ router.get("/login", (req, res) => {
     return;
   }
 
-  res.render("login");
+  res.render("login", { loggedIn: req.session.logged_in });
 });
 
 module.exports = router;
