@@ -1,9 +1,15 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const apiRoutes = require('./api');
-const homeRoutes = require('./home-routes.js');
+const homeRoutes = require("./homeController");
+const savedEventRoutes = require("./savedEventController");
+const searchEventRoutes = require("./searchEventController");
+const authRoutes = require("./authController");
+const geolocationRoutes = require("./geolocationController");
 
-router.use('/', homeRoutes);
-router.use('/api', apiRoutes);
+router.use("/", homeRoutes);
+router.use("/saved-events", savedEventRoutes);
+router.use("/search-events", searchEventRoutes);
+router.use("/auth", authRoutes);
+router.use("/api", geolocationRoutes);
 
 module.exports = router;

@@ -1,0 +1,15 @@
+<h1>Saved Events</h1>
+
+{{#if error}}
+  <p>{{error}}</p>
+{{/if}}
+
+<div class="event-list">
+  {{#each savedEvents}}
+    <div class="event-card">
+      <h2>{{event_name}}</h2>
+      <p>Date: {{event_date}}</p>
+      <button class="remove-event" data-event-id="{{event_id}}">Remove</button>
+    </div>
+  {{/each}}
+</div>

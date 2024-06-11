@@ -1,0 +1,46 @@
+<h1>Search Events</h1>
+
+{{#if error}}
+  <p>{{error}}</p>
+{{/if}}
+
+<form action="/search-events/search" method="POST">
+  <label for="keyword">Keyword:</label>
+  <input type="text" id="keyword" name="keyword">
+
+  <label for="startDate">Start Date:</label>
+  <input type="date" id="startDate" name="startDate">
+
+  <label for="endDate">End Date:</label>
+  <input type="date" id="endDate" name="endDate">
+
+  <label for="city">City:</label>
+  <input type="text" id="city" name="city">
+
+  <label for="stateCode">State Code:</label>
+  <input type="text" id="stateCode" name="stateCode">
+
+  <label for="postalCode">Postal Code:</label>
+  <input type="text" id="postalCode" name="postalCode">
+
+  <button type="submit">Search</button>
+</form>
+
+{{#if events}}
+  <div class="event-list">
+    {{#each events}}
+      <div class="event-card">
+        <img src="{{images.0.url}}" alt="{{name}}">
+        <h2>{{name}}</h2>
+        {{#if events}}
+  <div class="event-list">
+    {{#each events}}
+      <div class="event-card">
+        <img src="{{images.0.url}}" alt="{{name}}">
+        <h2>{{name}}</h2>
+        <p>Date: {{date}}</p>
+        <a href="{{url}}" target="_blank">View Details</a>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}

@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const axios = require("axios");
-const withAuth = require("../utils/auth");
-const User = require("../models/User");
-const Event = require("../models/events");
+const authMiddleware = require("../utils/authMiddleware");
+const helpers = require("../utils/helpers");
+const { SavedEvent } = require("../models");
 
 // GET all events in Salt Lake City from Ticketmaster Discovery API
 router.get("/", async (req, res) => {
@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
       venue: event._embedded.venues[0].name,
     }));
 
-    res.render("homepage", {
+    res.render("home", {
       events,
       loggedIn: req.session.loggedIn,
     });
@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/save-event", withAuth, async (req, res) => {
+router.post("/save-event", authMiddleware, async (req, res) => {
   try {
     const {
       eventId,
@@ -82,7 +82,7 @@ router.post("/save-event", withAuth, async (req, res) => {
 });
 
 // GET one event
-router.get("/event/:id", withAuth, async (req, res) => {
+router.get("/event/:id", authMiddleware, async (req, res) => {
   try {
     const response = await axios.get(
       `https://app.ticketmaster.com/discovery/v2/events/${req.params.id}.json`,
