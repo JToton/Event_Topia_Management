@@ -10,15 +10,6 @@
       {{#each savedEvents}}
         <div class="event-card">
           <h2>{{this.dataValues.event_name}}</h2>
-          {{#if this.dataValues.event_image_url}}
-            <img
-              src="{{this.dataValues.event_image_url}}"
-              alt="{{this.dataValues.event_name}} image"
-              style="width: 100%; height: auto;"
-            />
-          {{else}}
-            <p>No image available</p>
-          {{/if}}
           <p>Date: {{format_date this.dataValues.event_date}}</p>
           {{#if this.dataValues.event_time}}
             <p>Time: {{format_time this.dataValues.event_time}}</p>
