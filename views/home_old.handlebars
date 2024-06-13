@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Events in Salt Lake City</h1>
+
+  {{#if error}}
+    <p>{{error}}</p>
+  {{/if}}
+
+  {{#if events.length}}
+    <div class="event-list">
+      {{#each events}}
+        <div class="event-card">
+          <h2>{{this.name}}</h2>
+          <img src="{{this.imageUrl}}" alt="{{this.name}} image" style="width: 100%; height: auto;">
+          <p>Date: {{format_date this.startDate}}</p>
+          <p>Time: {{format_time this.startTime}}</p>
+          <p>Venue: {{this.venue}}</p>
+          <a href="{{this.url}}" target="_blank">View Details</a>
+          {{#if ../loggedIn}}
+  <button
+    class="save-event"
+    data-event-id="{{this.id}}"
+    data-event-name="{{this.name}}"
+    data-event-date="{{this.startDate}}"
+  >
+    Save Event
+  </button>
+{{else}}
+  <a href="/login">Log in to save events</a>
+{{/if}}
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p>No events found.</p>
+  {{/if}}
+</div>
