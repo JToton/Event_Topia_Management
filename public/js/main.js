@@ -3,31 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const removeEventButtons = document.querySelectorAll(".remove-event");
   const logoutButton = document.querySelector("#logout");
 
-  // *Geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        // *Send the coordinates to the server using an API endpoint.
-        fetch("/api/geolocation", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // *Send the geolocation data.
-          body: JSON.stringify({ latitude, longitude }),
-        });
-      },
-      (error) => {
-        // *Log any errors obtaining the geolocation.
-        console.error("Error obtaining geolocation:", error);
-      }
-    );
-  } else {
-    // *Log if geolocation is not supported by the browser.
-    console.error("Geolocation is not supported by this browser.");
-  }
-
   // *Add click event listeners to all save event .
   saveEventButtons.forEach((button) => {
     button.addEventListener("click", async (event) => {
