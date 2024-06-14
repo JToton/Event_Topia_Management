@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
           apikey: process.env.TICKETMASTER_API_KEY,
           city: "Salt Lake City",
           stateCode: "UT",
-          radius: "100",
+          radius: "20",
           unit: "miles",
           // *Sort events by date in ascending order.
           sort: "date,asc",
