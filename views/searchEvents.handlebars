@@ -30,13 +30,11 @@
   <div class="event-list">
     {{#each events}}
       <div class="event-card">
-        <img src="{{images.0.url}}" alt="{{name}}">
-        <h2>{{name}}</h2>
-        {{#if events}}
-  <div class="event-list">
-    {{#each events}}
-      <div class="event-card">
-        <img src="{{images.0.url}}" alt="{{name}}">
+        {{#if images}}
+          <img src="{{images.0.url}}" alt="{{name}}">
+        {{else}}
+          <p>No image available</p>
+        {{/if}}
         <h2>{{name}}</h2>
         <p>Date: {{date}}</p>
         <a href="{{url}}" target="_blank">View Details</a>
