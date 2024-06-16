@@ -12,21 +12,25 @@ router.get("/", authMiddleware, (req, res) => {
 router.post("/search", authMiddleware, async (req, res) => {
   try {
     // Destructure search parameters from request body
-    const { keyword, startDate, endDate, city, stateCode, postalCode } = req.body;
+    const { keyword, startDate, endDate, city, stateCode, postalCode } =
+      req.body;
 
     // Make request to Ticketmaster Discovery API with search parameters
-    const response = await axios.get("https://app.ticketmaster.com/discovery/v2/events.json", {
-      params: {
-        apikey: process.env.TICKETMASTER_API_KEY,
-        keyword,
-        startDateTime: startDate,
-        endDateTime: endDate,
-        city,
-        stateCode,
-        postalCode,
-        size: 20, // Limit results to 20
-      },
-    });
+    const response = await axios.get(
+      "https://app.ticketmaster.com/discovery/v2/events.json",
+      {
+        params: {
+          apikey: process.env.TICKETMASTER_API_KEY,
+          keyword,
+          startDateTime: startDate ? `${startDate}T00:00:00Z` : undefined,
+          endDateTime: endDate ? `${endDate}T23:59:59Z` : undefined,
+          city,
+          stateCode,
+          postalCode,
+          size: 20,
+        },
+      }
+    );
 
     // Extract relevant event information from response data
     const events = response.data._embedded.events.map((event) => ({
