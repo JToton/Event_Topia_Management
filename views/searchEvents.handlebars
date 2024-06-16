@@ -4,41 +4,117 @@
   <p>{{error}}</p>
 {{/if}}
 
-<form action="/search-events/search" method="POST">
+<form action="/search-events/search" method="GET">
+  <!-- Input for keyword search. -->
   <label for="keyword">Keyword:</label>
-  <input type="text" id="keyword" name="keyword">
+  <input type="text" id="keyword" name="keyword" value="{{keyword}}">
 
+  <!-- Input for start date. -->
   <label for="startDate">Start Date:</label>
-  <input type="date" id="startDate" name="startDate">
+  <input type="date" id="startDate" name="startDate" value="{{startDate}}">
 
+  <!-- Input for end date. -->
   <label for="endDate">End Date:</label>
-  <input type="date" id="endDate" name="endDate">
+  <input type="date" id="endDate" name="endDate" value="{{endDate}}">
 
+  <!-- Input for city. -->
   <label for="city">City:</label>
-  <input type="text" id="city" name="city">
+  <input type="text" id="city" name="city" value="{{city}}">
 
+  <!-- Input for state code. -->
   <label for="stateCode">State Code:</label>
-  <input type="text" id="stateCode" name="stateCode">
+  <input type="text" id="stateCode" name="stateCode" value="{{stateCode}}">
 
-  <label for="postalCode">Postal Code:</label>
-  <input type="text" id="postalCode" name="postalCode">
+  <!-- Input for postal code (removed). -->
+  {{!-- <label for="postalCode">Postal Code:</label>
+  <input type="text" id="postalCode" name="postalCode" value="{{postalCode}}"> --}}
 
+  <!-- Submit button for the search form. -->
   <button type="submit">Search</button>
 </form>
 
+<!-- Display events if there are any. -->
 {{#if events}}
   <div class="event-list">
+    <!-- Loop through each event. -->
     {{#each events}}
       <div class="event-card">
+        <!-- Display event image if available, otherwise show a placeholder text. -->
         {{#if images}}
           <img src="{{images.0.url}}" alt="{{name}}">
         {{else}}
           <p>No image available</p>
         {{/if}}
+        <!-- Display event name and date. -->
         <h2>{{name}}</h2>
         <p>Date: {{date}}</p>
+        <!-- Link to view event details. -->
         <a href="{{url}}" target="_blank">View Details</a>
       </div>
     {{/each}}
   </div>
+
+  <!-- Pagination navigation. -->
+  <nav>
+    <ul class="pagination">
+      <!-- Display "Previous" button if the current page is greater than 1. -->
+      {{#if (gt currentPage 1)}}
+        <li class="page-item">
+          <a class="page-link" href="?keyword={{keyword}}&startDate={{startDate}}&endDate={{endDate}}&city={{city}}&stateCode={{stateCode}}&page={{subtract currentPage 1}}">Previous</a>
+        </li>
+      {{else}}
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+      {{/if}}
+
+      <!-- Display page numbers if total pages are greater than 7. -->
+      {{#if (gt totalPages 7)}}
+        <!-- Display the first page and ellipsis if the current page is greater than 4. -->
+        {{#if (gt currentPage 4)}}
+          <li class="page-item">
+            <a class="page-link" href="?keyword={{keyword}}&startDate={{startDate}}&endDate={{endDate}}&city={{city}}&stateCode={{stateCode}}&page=1">1</a>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link">...</span>
+          </li>
+        {{/if}}
+
+        <!-- Loop through a range of page numbers around the current page. -->
+        {{#each (range (max 1 (subtract currentPage 3)) (min (add currentPage 4) totalPages))}}
+          <li class="page-item{{#if (eq this ../currentPage)}} active{{/if}}">
+            <a class="page-link" href="?keyword={{../keyword}}&startDate={{../startDate}}&endDate={{../endDate}}&city={{../city}}&stateCode={{../stateCode}}&page={{this}}">{{this}}</a>
+          </li>
+        {{/each}}
+
+        <!-- Display the last page and ellipsis if the current page is less than total pages minus 3. -->
+        {{#if (lt currentPage (subtract totalPages 3))}}
+          <li class="page-item disabled">
+            <span class="page-link">...</span>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?keyword={{keyword}}&startDate={{startDate}}&endDate={{endDate}}&city={{city}}&stateCode={{stateCode}}&page={{totalPages}}">{{totalPages}}</a>
+          </li>
+        {{/if}}
+      {{else}}
+        <!-- Loop through all pages if total pages are less than or equal to 7. -->
+        {{#each (range 1 (add totalPages 1))}}
+          <li class="page-item{{#if (eq this ../currentPage)}} active{{/if}}">
+            <a class="page-link" href="?keyword={{../keyword}}&startDate={{../startDate}}&endDate={{../endDate}}&city={{../city}}&stateCode={{../stateCode}}&page={{this}}">{{this}}</a>
+          </li>
+        {{/each}}
+      {{/if}}
+
+      <!-- Display "Next" button if the current page is less than total pages. -->
+      {{#if (lt currentPage totalPages)}}
+        <li class="page-item">
+          <a class="page-link" href="?keyword={{keyword}}&startDate={{startDate}}&endDate={{endDate}}&city={{city}}&stateCode={{stateCode}}&page={{add currentPage 1}}">Next</a>
+        </li>
+      {{else}}
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+      {{/if}}
+    </ul>
+  </nav>
 {{/if}}
