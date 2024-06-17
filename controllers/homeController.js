@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
     }
 
     res.render("home", {
+      headerClasses: "canScroll",
       events,
       savedEvents,
       loggedIn: req.session.logged_in,
