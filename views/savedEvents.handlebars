@@ -9,24 +9,29 @@
     <div class="event-list">
       {{#each savedEvents}}
         <div class="event-card">
-          <h2>{{this.dataValues.event_name}}</h2>
-          <p>Date: {{format_date this.dataValues.event_date}}</p>
-          {{#if this.dataValues.event_time}}
-            <p>Time: {{format_time this.dataValues.event_time}}</p>
+          {{#if this.imageUrl}}
+            <img src="{{this.imageUrl}}" alt="{{this.name}}" />
+          {{else}}
+            <p>No image available</p>
+          {{/if}}
+          <h2>{{this.name}}</h2>
+          <p>Date: {{format_date this.date}}</p>
+          {{#if this.time}}
+            <p>Time: {{format_time this.time}}</p>
           {{else}}
             <p>Time: N/A</p>
           {{/if}}
-          {{#if this.dataValues.event_venue}}
-            <p>Venue: {{this.dataValues.event_venue}}</p>
+          {{#if this.venue}}
+            <p>Venue: {{this.venue}}</p>
           {{else}}
             <p>Venue: N/A</p>
           {{/if}}
-          <a href="{{this.dataValues.event_url}}" target="_blank">View Details</a>
+          <a href="{{this.url}}" target="_blank">View Details</a>
           <button
             class="remove-event"
-            data-event-id="{{this.dataValues.event_id}}"
-            data-event-name="{{this.dataValues.event_name}}"
-            data-event-date="{{this.dataValues.event_date}}"
+            data-event-id="{{this.id}}"
+            data-event-name="{{this.name}}"
+            data-event-date="{{this.date}}"
           >Remove</button>
         </div>
       {{/each}}
