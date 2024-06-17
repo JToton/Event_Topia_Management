@@ -4,14 +4,15 @@ const axios = require("axios");
 
 // *Route to render the search events page.
 router.get("/", (req, res) => {
-  console.log("Search route handler triggered");
+  // ! Debug Code.
+  //console.log("Search route handler triggered");
   res.render("searchEvents", { loggedIn: req.session.logged_in });
 });
 
 router.all("/search", async (req, res) => {
   try {
     const { keyword, startDate, endDate, city, stateCode } = req.query;
-    const page = parseInt(req.query.page) || 1; // Get the current page from the query parameter or default to 1
+    const page = parseInt(req.query.page) || 1; // *Get the current page from the query parameter or default to 1.
 
     // *Make request to Ticketmaster Discovery API with search parameters.
     const response = await axios.get(
@@ -31,7 +32,7 @@ router.all("/search", async (req, res) => {
       }
     );
 
-    // *Extract relevant event information from response data
+    // *Extract relevant event information from response data.
     const events = response.data._embedded.events.map((event) => ({
       id: event.id,
       name: event.name,

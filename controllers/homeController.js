@@ -5,7 +5,8 @@ const helpers = require("../utils/helpers");
 const { SavedEvent } = require("../models");
 
 router.get("/", async (req, res) => {
-  console.log("Home route handler triggered");
+  //! Debug code
+  //console.log("Home route handler triggered");
 
   try {
     let events = [];
@@ -96,8 +97,8 @@ router.post("/save-event", authMiddleware, async (req, res) => {
     const userId = req.session.userId;
 
     // ! Debugging statements to log the request body and user ID.
-    console.log("Request Body:", req.body);
-    console.log("User ID:", userId);
+    //console.log("Request Body:", req.body);
+    //console.log("User ID:", userId);
 
     // *Check if the event is already saved by the user.
     const existingEvent = await SavedEvent.findOne({

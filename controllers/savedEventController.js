@@ -3,12 +3,14 @@ const authMiddleware = require("../utils/authMiddleware");
 const { SavedEvent } = require("../models");
 const axios = require("axios");
 
-// Route to GET all saved events for the logged-in user
+// *Route to GET all saved events for the logged-in user.
 router.get("/", authMiddleware, async (req, res) => {
-  console.log("Saved Events route handler triggered");
+  // ! Debug Code.
+  //console.log("Saved Events route handler triggered");
   try {
     const savedEvents = await fetchSavedEventsForUser(req.session.userId);
-    console.log("Saved Events:", savedEvents);
+    // ! Debug code.
+    //console.log("Saved Events:", savedEvents);
     res.render("savedEvents", { savedEvents, loggedIn: req.session.logged_in });
   } catch (err) {
     console.error(err);
@@ -19,13 +21,14 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-// Route to POST (remove) a saved event for the logged-in user
+// *Route to POST (remove) a saved event for the logged-in user.
 router.post("/remove-event", authMiddleware, async (req, res) => {
   try {
     const { eventId } = req.body;
-    console.log("Removing event with ID:", eventId);
+    //! Debug Code.
+    //console.log("Removing event with ID:", eventId);
 
-    // Delete the specified saved event for the current user from the database
+    // *Delete the specified saved event for the current user from the database.
     await SavedEvent.destroy({
       where: {
         user_id: req.session.userId,
@@ -40,7 +43,7 @@ router.post("/remove-event", authMiddleware, async (req, res) => {
   }
 });
 
-// Function to fetch event details from Ticketmaster Discovery API
+// *Function to fetch event details from Ticketmaster Discovery API.
 const fetchEventDetails = async (eventId) => {
   try {
     const response = await axios.get(
@@ -59,7 +62,7 @@ const fetchEventDetails = async (eventId) => {
   }
 };
 
-// Function to fetch all saved events for the current user
+// *Function to fetch all saved events for the current user.
 const fetchSavedEventsForUser = async (userId) => {
   try {
     const savedEvents = await SavedEvent.findAll({

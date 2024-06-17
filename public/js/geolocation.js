@@ -1,4 +1,4 @@
-// Function to retrieve the user's geolocation
+// *Function to retrieve the user's geolocation.
 async function getGeolocation() {
   if (navigator.geolocation) {
     return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ async function getGeolocation() {
   }
 }
 
-// Function to fetch events from the server based on latitude and longitude
+// *Function to fetch events from the server based on latitude and longitude.
 async function fetchEvents(latitude, longitude) {
   try {
     const response = await fetch("/events", {
@@ -40,7 +40,7 @@ async function fetchEvents(latitude, longitude) {
   }
 }
 
-// Function to display events on the page
+// *Function to display events on the page.
 async function displayEvents() {
   try {
     const { latitude, longitude } = await getGeolocation();
@@ -78,7 +78,7 @@ async function displayEvents() {
       eventsContainer.appendChild(eventList);
     }
 
-    // Add event listener to save event buttons
+    // *Add event listener to save event buttons.
     const saveEventButtons = document.querySelectorAll(".save-event");
     saveEventButtons.forEach((button) => {
       button.addEventListener("click", saveEvent);
@@ -88,7 +88,7 @@ async function displayEvents() {
   }
 }
 
-// Helper function to format the date
+// *Helper function to format the date.
 function formatDate(dateString) {
   const date = new Date(dateString);
   const month = date.getMonth() + 1;
@@ -97,7 +97,7 @@ function formatDate(dateString) {
   return `${month}/${day}/${year}`;
 }
 
-// Helper function to format the time
+// *Helper function to format the time.
 function formatTime(timeString) {
   if (!timeString) {
     return "No Time Available";
@@ -108,7 +108,7 @@ function formatTime(timeString) {
   return `${hours12}:${minutes} ${ampm}`;
 }
 
-// Function to save an event
+// *Function to save an event.
 async function saveEvent(event) {
   const eventId = event.target.dataset.eventId;
   const eventName = event.target.dataset.eventName;
@@ -133,5 +133,5 @@ async function saveEvent(event) {
   }
 }
 
-// Event listener to trigger displayEvents when the DOM is loaded
+// *Event listener to trigger displayEvents when the DOM is loaded.
 document.addEventListener("DOMContentLoaded", displayEvents);

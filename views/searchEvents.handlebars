@@ -3,7 +3,7 @@
 {{#if error}}
   <p>{{error}}</p>
 {{/if}}
-
+<div class="search_forms">
 <form action="/search-events/search" method="GET">
   <!-- Input for keyword search. -->
   <label for="keyword">Keyword:</label>
@@ -32,7 +32,7 @@
   <!-- Submit button for the search form. -->
   <button type="submit">Search</button>
 </form>
-
+</div>
 <!-- Display events if there are any. -->
 {{#if events}}
   <div class="event-list">

@@ -7,7 +7,7 @@ const { SavedEvent } = require("../models");
 // *Route to GET all events in Salt Lake City from the Ticketmaster Discovery API.
 router.get("/", async (req, res) => {
   // ! Debugging statement to indicate the route handler is triggered.
-  console.log("Home route handler triggered");
+  //console.log("Home route handler triggered");
 
   try {
     // *Make a request to the Ticketmaster Discovery API to get events in Salt Lake City.
@@ -84,8 +84,8 @@ router.post("/save-event", authMiddleware, async (req, res) => {
     const userId = req.session.userId;
 
     // ! Debugging statements to log the request body and user ID.
-    console.log("Request Body:", req.body);
-    console.log("User ID:", userId);
+    //console.log("Request Body:", req.body);
+    //console.log("User ID:", userId);
 
     // *Check if the event is already saved by the user.
     const existingEvent = await SavedEvent.findOne({
