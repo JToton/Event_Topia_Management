@@ -7,13 +7,31 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  font-family: Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, sans-serif;
 }
 
 header {
   background-color: #333;
   color: #fff;
   padding: 20px;
+  justify-content: center;
+  display: flex;
+}
+
+header.canScroll {
+  position: relative;
+  width: 100%;
+}
+
+header.scrolling {
+  position: fixed;
+}
+
+nav {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav ul {
@@ -41,6 +59,10 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 200px;
+  margin-left: 200px;
 }
 
 .event-card {
@@ -103,4 +125,9 @@ footer {
   color: #fff;
   padding: 10px;
   text-align: center;
+}
+
+h1 {
+  text-align: center;
+  font-family: fantasy;
 }
