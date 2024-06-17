@@ -1,17 +1,26 @@
-<h1>Login</h1>
+<div class="container_forms">
+  <div class="auth-form">
+    <h1>Login</h1>
 
-{{#if error}}
-  <p>{{error}}</p>
-{{/if}}
+    {{#if error}}
+      <p class="error-message">{{error}}</p>
+    {{/if}}
 
-<form action="/auth/login" method="POST">
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required />
+    <form action="/auth/login" method="POST">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
 
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required />
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
 
-  <button type="submit">Login</button>
-</form>
+      <button type="submit">Login</button>
+    </form>
 
-<p>Don't have an account? <a href="/auth/signup">Sign up</a></p>
+    <p class="auth-link">Don't have an account?
+      <a href="/auth/signup">Sign up</a></p>
+  </div>
+</div>
