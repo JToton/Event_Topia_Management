@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const axios = require("axios");
-const authMiddleware = require("../utils/authMiddleware");
+//const authMiddleware = require("../utils/authMiddleware");
 
 // *Route to render the search events page.
-router.get("/", authMiddleware, (req, res) => {
+router.get("/", (req, res) => {
   console.log("Search route handler triggered");
   res.render("searchEvents", { loggedIn: req.session.logged_in });
 });
 
-router.all("/search", authMiddleware, async (req, res) => {
+router.all("/search", async (req, res) => {
   try {
     const { keyword, startDate, endDate, city, stateCode } = req.query;
     const page = parseInt(req.query.page) || 1; // Get the current page from the query parameter or default to 1
